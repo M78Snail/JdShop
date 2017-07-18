@@ -51,9 +51,6 @@
                     android:id="@+id/imgview_small_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/img_0_small1"
-
-
                     />
 
                 <View
@@ -64,7 +61,7 @@
                     android:id="@+id/imgview_small_bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/img_0_small2" />
+                    />
 
 
             </LinearLayout>
@@ -82,7 +79,7 @@
                 android:id="@+id/imgview_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/img_big_0" />
+                />
 
 
         </LinearLayout>

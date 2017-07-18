@@ -1,5 +1,6 @@
 package com.example.duxiaoming.jdshop.adapter
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.duxiaoming.jdshop.R
-import com.example.duxiaoming.jdshop.bean.HomeCategory
+import com.example.duxiaoming.jdshop.bean.HomeCampaign
+import com.squareup.picasso.Picasso
+
+
 
 
 /**
@@ -15,16 +19,20 @@ import com.example.duxiaoming.jdshop.bean.HomeCategory
  * blog:m78snail.com
  * description:
  */
-class HomeCatgoryAdapter(private val mDatas: List<HomeCategory>) : RecyclerView.Adapter<HomeCatgoryAdapter.ViewHolder>() {
+class HomeCatgoryAdapter(public val mDatas: List<HomeCampaign>, private val mContext: Context) : RecyclerView.Adapter<HomeCatgoryAdapter.ViewHolder>() {
 
 
     private var mInflater: LayoutInflater? = null
+
+    private var mListener: OnCampaignClickListener? = null
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val category = mDatas[position]
-        holder.textTitle!!.text = category.name
-        holder.imageViewBig!!.setImageResource(category.imgBig)
-        holder.imageViewSmallTop!!.setImageResource(category.imgSmallTop)
-        holder.imageViewSmallBottom!!.setImageResource(category.imgSmallBottom)
+        holder.textTitle!!.text = category.title
+        Picasso.with(mContext).load(category.cpOne.imgUrl).into(holder.imageViewBig)
+        Picasso.with(mContext).load(category.cpTwo.imgUrl).into(holder.imageViewSmallTop)
+        Picasso.with(mContext).load(category.cpThree.imgUrl).into(holder.imageViewSmallBottom)
+
+
     }
 
     override fun getItemCount(): Int {
@@ -53,7 +61,26 @@ class HomeCatgoryAdapter(private val mDatas: List<HomeCategory>) : RecyclerView.
     }
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setOnCampaignClickListener(listener: OnCampaignClickListener) {
+
+        this.mListener = listener
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        override fun onClick(v: View?) {
+            val homeCampaign: HomeCampaign = mDatas[layoutPosition]
+            if (mListener != null) {
+                if (v != null) {
+                    when (v.id) {
+                        R.id.imgview_big -> mListener!!.onClick(v, homeCampaign)
+                        R.id.imgview_small_top -> mListener!!.onClick(v, homeCampaign)
+                        R.id.imgview_small_bottom -> mListener!!.onClick(v, homeCampaign)
+
+                    }
+                }
+            }
+        }
+
         var textTitle: TextView? = null
         var imageViewBig: ImageView? = null
         var imageViewSmallTop: ImageView? = null
@@ -65,6 +92,13 @@ class HomeCatgoryAdapter(private val mDatas: List<HomeCategory>) : RecyclerView.
             imageViewSmallTop = itemView.findViewById(R.id.imgview_small_top) as ImageView
             imageViewSmallBottom = itemView.findViewById(R.id.imgview_small_bottom) as ImageView
 
+            imageViewBig!!.setOnClickListener(this)
+            imageViewSmallTop!!.setOnClickListener(this)
+            imageViewSmallBottom!!.setOnClickListener(this)
         }
+    }
+
+    interface OnCampaignClickListener {
+        fun onClick(view: View, campaign: HomeCampaign)
     }
 }

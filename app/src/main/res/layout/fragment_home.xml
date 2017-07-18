@@ -14,24 +14,14 @@
         app:isShowSearchView="true" />
 
 
-    <RelativeLayout
-        android:id="@+id/relate_slider"
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
         android:layout_width="match_parent"
-        android:layout_height="180dp">
-
-        <com.daimajia.slider.library.Indicators.PagerIndicator
-            android:id="@+id/custom_indicator"
-            style="@style/AndroidImageSlider_Corner_Oval_Orange"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true" />
-
-        <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/slider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
-    </RelativeLayout>
+        app:pager_animation="Accordion"
+        app:auto_cycle="true"
+        app:indicator_visibility="visible"
+        app:pager_animation_span="1100"
+        android:layout_height="180dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"

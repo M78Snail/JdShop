@@ -4,20 +4,20 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.daimajia.slider.library.Animations.DescriptionAnimation
-import com.daimajia.slider.library.Indicators.PagerIndicator
 import com.daimajia.slider.library.SliderLayout
 import com.daimajia.slider.library.SliderTypes.BaseSliderView
 import com.daimajia.slider.library.SliderTypes.TextSliderView
+import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
 import com.example.duxiaoming.jdshop.adapter.DividerItemDecortion
 import com.example.duxiaoming.jdshop.adapter.HomeCatgoryAdapter
 import com.example.duxiaoming.jdshop.bean.Banner
-import com.example.duxiaoming.jdshop.bean.HomeCategory
+import com.example.duxiaoming.jdshop.bean.HomeCampaign
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
 import com.example.duxiaoming.jdshop.http.SpotsCallBack
 import com.squareup.okhttp.Response
@@ -26,7 +26,6 @@ import com.squareup.okhttp.Response
 class HomeFragment : Fragment() {
 
     private var sliderShow: SliderLayout? = null
-    private var indicator: PagerIndicator? = null
 
     private var mRecyclerView: RecyclerView? = null
 
@@ -39,7 +38,6 @@ class HomeFragment : Fragment() {
         val view: View = inflater!!.inflate(R.layout.fragment_home, container, false)
 
         sliderShow = view.findViewById(R.id.slider) as SliderLayout
-        indicator = view.findViewById(R.id.custom_indicator) as PagerIndicator?
 
         requestImages()
         initRecyclerView(view)
@@ -51,7 +49,6 @@ class HomeFragment : Fragment() {
 
         httpHelper.get(url, object : SpotsCallBack<List<Banner>>(context) {
             override fun onSuccess(response: Response, t: List<Banner>) {
-                Log.d("TAG>>>>>>>>>.", t.size.toString())
                 mBanner = t
                 initSlider()
             }
@@ -74,41 +71,42 @@ class HomeFragment : Fragment() {
 
         }
 
-        sliderShow!!.setCustomAnimation(DescriptionAnimation())
-        sliderShow!!.setPresetTransformer(SliderLayout.Transformer.Accordion)
         sliderShow!!.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom)
-
+        sliderShow!!.setCustomAnimation(DescriptionAnimation())
+        sliderShow!!.setPresetTransformer(SliderLayout.Transformer.RotateUp)
         sliderShow!!.setDuration(3000)
-        sliderShow!!.setCustomIndicator(indicator)
+
     }
 
     private fun initRecyclerView(view: View) {
         mRecyclerView = view.findViewById(R.id.recyclerview) as RecyclerView?
 
-        val datas = ArrayList<HomeCategory>(15)
+        httpHelper.get(Contants.API.CAMPAIGN_HOME, object : SpotsCallBack<List<HomeCampaign>>(context) {
+            override fun onSuccess(response: Response, t: List<HomeCampaign>) {
+                initData(t)
+            }
 
-        var category = HomeCategory("热门活动", R.drawable.img_big_1, R.drawable.img_1_small1, R.drawable.img_1_small2)
-        datas.add(category)
+            override fun onError(response: Response, code: Int, e: Exception) {
+                Toast.makeText(context, "网络错误", Toast.LENGTH_LONG).show()
+            }
 
-        category = HomeCategory("有利可图", R.drawable.img_big_4, R.drawable.img_4_small1, R.drawable.img_4_small2)
-        datas.add(category)
-        category = HomeCategory("品牌街", R.drawable.img_big_2, R.drawable.img_2_small1, R.drawable.img_2_small2)
-        datas.add(category)
+        })
 
-        category = HomeCategory("金融街 包赚翻", R.drawable.img_big_1, R.drawable.img_3_small1, R.drawable.imag_3_small2)
-        datas.add(category)
+    }
 
-        category = HomeCategory("超值购", R.drawable.img_big_0, R.drawable.img_0_small1, R.drawable.img_0_small2)
-        datas.add(category)
+    private fun initData(homeCampaigns: List<HomeCampaign>) {
+        mAdatper = HomeCatgoryAdapter(homeCampaigns, context)
+        mAdatper!!.setOnCampaignClickListener(object : HomeCatgoryAdapter.OnCampaignClickListener {
+            override fun onClick(view: View, campaign: HomeCampaign) {
+                Toast.makeText(context, "title=" + campaign.title, Toast.LENGTH_LONG).show()
+            }
 
+        })
 
-        mAdatper = HomeCatgoryAdapter(datas)
 
         mRecyclerView?.adapter = mAdatper
         mRecyclerView?.addItemDecoration(DividerItemDecortion())
         mRecyclerView?.layoutManager = LinearLayoutManager(this.activity)
-
-
     }
 
     override fun onDestroy() {
