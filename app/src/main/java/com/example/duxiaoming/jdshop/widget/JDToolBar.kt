@@ -106,7 +106,7 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
 
     override fun setTitle(resId: Int) {
-        setTitle(context.getText(resId))
+        title = context.getText(resId)
     }
 
     override fun setTitle(title: CharSequence?) {

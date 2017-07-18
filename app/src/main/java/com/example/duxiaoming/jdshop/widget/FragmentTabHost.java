@@ -39,7 +39,12 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
+import com.example.duxiaoming.jdshop.bean.Banner;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Special TabHost that allows the use of {@link Fragment} objects for its tab
@@ -71,6 +76,8 @@ public class FragmentTabHost extends TabHost implements
     private OnTabChangeListener mOnTabChangeListener;
     private TabInfo mLastTab;
     private boolean mAttached;
+
+    Type type = new  TypeToken<List<Banner>>(){}.getType();
 
     static final class TabInfo {
         private final String tag;
@@ -306,6 +313,8 @@ public class FragmentTabHost extends TabHost implements
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mAttached = false;
+
+
     }
 
     @Override

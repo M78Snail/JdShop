@@ -1,0 +1,6 @@
+<root>
+  <item name='com.google.gson.Gson T fromJson(java.lang.String, java.lang.reflect.Type)'>
+    <annotation name='java.lang.annotation.Deprecated' />
+    <annotation name='android.support.annotation.NonNull' />
+  </item>
+</root>
