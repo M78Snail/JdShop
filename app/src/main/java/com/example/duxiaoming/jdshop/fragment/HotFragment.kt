@@ -12,8 +12,8 @@ import com.cjj.MaterialRefreshLayout
 import com.cjj.MaterialRefreshListener
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
-import com.example.duxiaoming.jdshop.adapter.DividerItemDecortion
 import com.example.duxiaoming.jdshop.adapter.HWAdatper
+import com.example.duxiaoming.jdshop.adapter.decoration.DividerItemDecoration
 import com.example.duxiaoming.jdshop.bean.Page
 import com.example.duxiaoming.jdshop.bean.Wares
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
@@ -86,10 +86,10 @@ class HotFragment : Fragment() {
     private fun showData() {
         when (state) {
             STATE_NORMAL -> {
-                mAdapter = HWAdatper(context,datas!!)
+                mAdapter = HWAdatper(context, datas!!)
                 mRecycleView?.itemAnimator = DefaultItemAnimator()
                 mRecycleView?.adapter = mAdapter
-                mRecycleView?.addItemDecoration(DividerItemDecortion())
+                mRecycleView?.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))
                 mRecycleView?.layoutManager = LinearLayoutManager(this.activity)
             }
             STATE_REFRESH -> {

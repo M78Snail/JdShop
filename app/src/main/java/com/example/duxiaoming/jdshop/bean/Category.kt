@@ -1,8 +1,10 @@
 package com.example.duxiaoming.jdshop.bean
 
 /**
- * Created by Ivan on 15/9/24.
- */
+* Created by Ivan on 15/9/24.
+* blog:m78snail.com
+* description:
+*/
 open class Category : BaseBean {
 
 

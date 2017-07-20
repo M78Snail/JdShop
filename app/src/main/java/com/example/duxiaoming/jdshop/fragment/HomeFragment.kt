@@ -14,8 +14,8 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView
 import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
-import com.example.duxiaoming.jdshop.adapter.DividerItemDecortion
 import com.example.duxiaoming.jdshop.adapter.HomeCatgoryAdapter
+import com.example.duxiaoming.jdshop.adapter.decoration.DividerItemDecoration
 import com.example.duxiaoming.jdshop.bean.Banner
 import com.example.duxiaoming.jdshop.bean.HomeCampaign
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
@@ -73,7 +73,6 @@ class HomeFragment : Fragment() {
 
         sliderShow!!.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom)
         sliderShow!!.setCustomAnimation(DescriptionAnimation())
-        sliderShow!!.setPresetTransformer(SliderLayout.Transformer.RotateUp)
         sliderShow!!.setDuration(3000)
 
     }
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
 
 
         mRecyclerView?.adapter = mAdatper
-        mRecyclerView?.addItemDecoration(DividerItemDecortion())
+        mRecyclerView?.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL_LIST))
         mRecyclerView?.layoutManager = LinearLayoutManager(this.activity)
     }
 

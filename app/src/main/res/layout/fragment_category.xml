@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/catagory" />
+    <com.example.duxiaoming.jdshop.widget.JDToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:isShowSearchView="false"
+        app:title="分类" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_category"
+            android:layout_width="@dimen/x200"
+            android:layout_height="fill_parent"
+            android:background="@color/white">
+
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x2"
+            android:orientation="vertical">
+
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y300"
+                app:auto_cycle="true"
+                app:indicator_visibility="visible"
+                app:pager_animation="Accordion"
+                app:pager_animation_span="1100" />
+
+
+            <com.cjj.MaterialRefreshLayout
+                android:id="@+id/refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y10"
+                app:overlay="false"
+                app:progress_colors="@array/material_colors"
+                app:progress_show_circle_backgroud="false"
+                app:wave_height_type="higher"
+                app:wave_show="false">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_wares"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </com.cjj.MaterialRefreshLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </LinearLayout>
