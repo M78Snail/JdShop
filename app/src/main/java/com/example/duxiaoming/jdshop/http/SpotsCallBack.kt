@@ -6,8 +6,14 @@ import com.squareup.okhttp.Response
 import dmax.dialog.SpotsDialog
 
 
-abstract class SpotsCallBack<T>(private val mContext: Context) : BaseCallback<T>() {
-    private val mDialog: SpotsDialog = SpotsDialog(mContext, "拼命加载中")
+abstract class SpotsCallBack<in T> (val mContext: Context) : BaseCallback<T>(mContext) {
+
+
+    private val mDialog: SpotsDialog
+
+    init {
+        mDialog = SpotsDialog(mContext, "拼命加载中")
+    }
 
     fun showDialog() {
         mDialog.show()

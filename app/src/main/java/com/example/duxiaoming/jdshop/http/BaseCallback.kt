@@ -1,5 +1,6 @@
 package com.example.duxiaoming.jdshop.http
 
+import android.content.Context
 import com.google.gson.internal.`$Gson$Types`
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
@@ -9,7 +10,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 
-abstract class BaseCallback<in T> {
+abstract class BaseCallback<in T> constructor( var context:Context){
 
 
     var mType: Type

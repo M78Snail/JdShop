@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso
  * blog:m78snail.com
  * description:
  */
-class HomeCatgoryAdapter(public val mDatas: List<HomeCampaign>, private val mContext: Context) : RecyclerView.Adapter<HomeCatgoryAdapter.ViewHolder>() {
+class HomeCatgoryAdapter(val mDatas: List<HomeCampaign>, private val mContext: Context) : RecyclerView.Adapter<HomeCatgoryAdapter.ViewHolder>() {
 
 
     private var mInflater: LayoutInflater? = null
