@@ -41,17 +41,17 @@
 
             <LinearLayout
                 android:id="@+id/layout_left"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
 
                 >
 
                 <ImageView
                     android:id="@+id/imgview_small_top"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <View
                     android:id="@+id/line2"
@@ -59,16 +59,14 @@
 
                 <ImageView
                     android:id="@+id/imgview_small_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
 
             <View
                 android:id="@+id/line"
-
                 style="@style/line_horizontal"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -77,9 +75,9 @@
 
             <ImageView
                 android:id="@+id/imgview_big"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                />
+                android:layout_weight="1" />
 
 
         </LinearLayout>

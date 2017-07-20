@@ -13,7 +13,7 @@ import com.cjj.MaterialRefreshListener
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
 import com.example.duxiaoming.jdshop.adapter.DividerItemDecortion
-import com.example.duxiaoming.jdshop.adapter.HotWaresAdapter
+import com.example.duxiaoming.jdshop.adapter.HWAdatper
 import com.example.duxiaoming.jdshop.bean.Page
 import com.example.duxiaoming.jdshop.bean.Wares
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
@@ -28,7 +28,7 @@ class HotFragment : Fragment() {
     private var pageSize = 10
     private var totalPage: Int = 0
 
-    private var mAdapter: HotWaresAdapter? = null
+    private var mAdapter: HWAdatper? = null
     private var mRecycleView: RecyclerView? = null
 
     private var datas: MutableList<Wares>? = null
@@ -86,21 +86,21 @@ class HotFragment : Fragment() {
     private fun showData() {
         when (state) {
             STATE_NORMAL -> {
-                mAdapter = HotWaresAdapter(datas!!, context)
+                mAdapter = HWAdatper(context,datas!!)
                 mRecycleView?.itemAnimator = DefaultItemAnimator()
                 mRecycleView?.adapter = mAdapter
                 mRecycleView?.addItemDecoration(DividerItemDecortion())
                 mRecycleView?.layoutManager = LinearLayoutManager(this.activity)
             }
             STATE_REFRESH -> {
-                mAdapter!!.clearData()
+                mAdapter!!.clear()
                 mAdapter!!.addData(datas!!)
                 mRecycleView!!.scrollToPosition(0)
                 mRefreshLayout!!.finishRefresh()
             }
             STATE_MORE -> {
-                mAdapter!!.addData(mAdapter!!.mDatas.size, datas)
-                mRecycleView!!.scrollToPosition(mAdapter!!.mDatas.size)
+                mAdapter!!.addData(mAdapter!!.getDatas()!!.size, datas)
+                mRecycleView!!.scrollToPosition(mAdapter!!.getDatas()!!.size)
                 mRefreshLayout!!.finishRefreshLoadMore()
             }
         }
