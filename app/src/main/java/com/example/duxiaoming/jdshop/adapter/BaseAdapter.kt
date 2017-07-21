@@ -57,13 +57,8 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
 
     fun clear() {
 
-        val it = mData!!.iterator()
-        while (it.hasNext()) {
-
-            val position = mData!!.indexOf(it.next())
-            it.remove()
-            notifyItemRemoved(position)
-        }
+        mData!!.clear()
+        notifyDataSetChanged()
     }
 
     /**
@@ -83,20 +78,17 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
     }
 
 
-    fun addData(datas: List<T>) {
-
-        addData(0, datas)
+    fun addData(datas: MutableList<T>) {
+        mData!!.addAll(datas)
+        notifyDataSetChanged()
     }
 
-    fun addData(position: Int, list: List<T>?) {
+    fun addData(position: Int, list: MutableList<T>?) {
 
         if (list != null && list.isNotEmpty()) {
 
-            for (t in list) {
-                mData!!.add(position, t)
-                notifyItemInserted(position)
-            }
-
+            mData!!.addAll(position,list)
+            notifyDataSetChanged()
         }
     }
 

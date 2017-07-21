@@ -49,22 +49,7 @@ class HotFragment : Fragment() {
 
     }
 
-    private fun getData() {
-        val url: String = Contants.API.WARES_HOT + "?curPage=" + curPage + "&pageSize=" + pageSize
-        httpHelper!!.get(url, object : SpotsCallBack<Page<Wares>>(context) {
-            override fun onSuccess(response: Response, t: Page<Wares>) {
-                datas = t.list
-                curPage = t.currentPage
-                totalPage = t.totalPage
-                showData()
-            }
 
-            override fun onError(response: Response, code: Int, e: Exception) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-        })
-    }
 
     private fun initRefreshLayout() {
         mRefreshLayout!!.setLoadMore(true)
@@ -80,6 +65,35 @@ class HotFragment : Fragment() {
                     mRefreshLayout!!.finishRefreshLoadMore()
                 }
             }
+        })
+    }
+
+
+    private fun refreshData() {
+        curPage = 1
+        state = STATE_REFRESH
+        getData()
+    }
+
+    private fun loadMoreData() {
+        curPage = ++curPage
+        state = STATE_MORE
+        getData()
+    }
+    private fun getData() {
+        val url: String = Contants.API.WARES_HOT + "?curPage=" + curPage + "&pageSize=" + pageSize
+        httpHelper!!.get(url, object : SpotsCallBack<Page<Wares>>(context) {
+            override fun onSuccess(response: Response, t: Page<Wares>) {
+                datas = t.list
+                curPage = t.currentPage
+                totalPage = t.totalPage
+                showData()
+            }
+
+            override fun onError(response: Response, code: Int, e: Exception) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
         })
     }
 
@@ -104,18 +118,6 @@ class HotFragment : Fragment() {
                 mRefreshLayout!!.finishRefreshLoadMore()
             }
         }
-    }
-
-    private fun refreshData() {
-        curPage = 1
-        state = STATE_REFRESH
-        getData()
-    }
-
-    private fun loadMoreData() {
-        curPage = ++curPage
-        state = STATE_MORE
-        getData()
     }
 
     companion object {
