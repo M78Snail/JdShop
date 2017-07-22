@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
 import com.example.duxiaoming.jdshop.R
 import com.example.duxiaoming.jdshop.adapter.CartAdapter
 import com.example.duxiaoming.jdshop.adapter.decoration.DividerItemDecoration
@@ -24,6 +26,8 @@ class CartFragment : Fragment(), View.OnClickListener {
     private var cartProvider: CartProvider? = null
     private var mAdapter: CartAdapter? = null
     protected var mToolbar: JDToolBar? = null
+    private var mCheckBox: CheckBox? = null
+    private var mTextTotal: TextView? = null
 
 
     private var carts: MutableList<ShoppingCart>? = mutableListOf()
@@ -38,6 +42,9 @@ class CartFragment : Fragment(), View.OnClickListener {
     private fun initView(view: View) {
         mToolbar = view.findViewById(R.id.toolbar) as JDToolBar
         mRecyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
+        mCheckBox = view.findViewById(R.id.checkbox_all) as CheckBox
+        mTextTotal = view.findViewById(R.id.txt_total) as TextView
+
         cartProvider = CartProvider(context)
     }
 
@@ -46,7 +53,7 @@ class CartFragment : Fragment(), View.OnClickListener {
 
         carts = cartProvider!!.getAll()
 
-        mAdapter = CartAdapter(context, carts)
+        mAdapter = CartAdapter(context, carts, mCheckBox!!, mTextTotal!!)
 
         mRecyclerView!!.adapter = mAdapter
         mRecyclerView!!.layoutManager = LinearLayoutManager(context)
@@ -59,6 +66,8 @@ class CartFragment : Fragment(), View.OnClickListener {
         mAdapter!!.clear()
         carts = cartProvider?.getAll()
         mAdapter!!.addData(carts)
+        mAdapter!!.showTotalPrice()
+
 
     }
 

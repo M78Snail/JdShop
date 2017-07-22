@@ -16,6 +16,10 @@ class CartProvider(var mContext: Context) {
 
     private var datas: SparseArray<ShoppingCart> = SparseArray(10)
 
+    init {
+        listToSparse()
+    }
+
     companion object {
         val CART_JSON = "cart_json"
     }
@@ -66,10 +70,7 @@ class CartProvider(var mContext: Context) {
         val size = datas.size()
 
         val list: MutableList<ShoppingCart> = mutableListOf()
-        for (i in 0..size - 1) {
-
-            val add = list.add(datas.valueAt(i))
-        }
+        (0..size - 1).mapTo(list) { datas.valueAt(it) }
         return list
 
 

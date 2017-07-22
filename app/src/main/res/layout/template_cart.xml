@@ -26,7 +26,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/drawee_view"
-            android:layout_width="@dimen/x300"
+            android:layout_width="@dimen/x330"
             android:layout_height="@dimen/y400" />
 
 
@@ -60,7 +60,9 @@
                 android:id="@+id/num_control"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y120"
+                android:layout_gravity="right|end"
                 android:layout_marginTop="@dimen/y20"
+                android:layout_marginEnd="@dimen/y20"
                 app:minValue="1" />
 
 
