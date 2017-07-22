@@ -9,5 +9,9 @@
     <string name="catagory">分类</string>
     <string name="cart">购物车</string>
     <string name="mine">我的</string>
+    <string name="btn_goPrice">去结算</string>
+    <string name="btn_delete">删除</string>
+    <string name="txt_total">合计</string>
+    <string name="txt_selectAll">全选</string>
 
 </resources>

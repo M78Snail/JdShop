@@ -3,6 +3,7 @@ package com.example.duxiaoming.jdshop.utils
 import android.content.Context
 import android.util.SparseArray
 import com.example.duxiaoming.jdshop.bean.ShoppingCart
+import com.example.duxiaoming.jdshop.bean.Wares
 import com.google.gson.reflect.TypeToken
 
 
@@ -20,7 +21,8 @@ class CartProvider(var mContext: Context) {
     }
 
     fun put(cart: ShoppingCart) {
-        var temp: ShoppingCart = datas.get(cart.id!!.toInt())
+
+        var temp: ShoppingCart? = datas.get(cart.id!!.toInt())
         if (temp != null) {
             temp.count = temp.count + 1
         } else {
@@ -30,6 +32,13 @@ class CartProvider(var mContext: Context) {
 
         datas.put(cart.id!!.toInt(), temp)
         commit()
+
+    }
+
+    fun put(wares: Wares) {
+
+        val cart = convertData(wares)
+        put(cart)
 
     }
 
@@ -77,9 +86,23 @@ class CartProvider(var mContext: Context) {
     }
 
     private fun getDataFromLocal(): MutableList<ShoppingCart> {
-        val json = PreferencesUtils.getString(mContext, CART_JSON)
+        val json = PreferencesUtils.getString(mContext, CART_JSON, "")
 
         return JSONUtil.fromJson(json, object : TypeToken<MutableList<ShoppingCart>>() {}.type)
     }
+
+    fun convertData(item: Wares): ShoppingCart {
+
+        val cart = ShoppingCart()
+
+        cart.id = item.id
+        cart.description = item.description
+        cart.imgUrl = item.imgUrl
+        cart.name = item.name
+        cart.price = item.price
+
+        return cart
+    }
+
 
 }

@@ -10,11 +10,14 @@ import com.example.duxiaoming.jdshop.bean.Tab
 import com.example.duxiaoming.jdshop.fragment.*
 import com.example.duxiaoming.jdshop.widget.FragmentTabHost
 
+
 class MainActivity : AppCompatActivity() {
 
     private var mInflater: LayoutInflater? = null
     private var mTabhost: FragmentTabHost? = null
     private var mTabs = ArrayList<Tab>(5)
+    private var cartFragment: CartFragment? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +46,34 @@ class MainActivity : AppCompatActivity() {
             tabSpec.setIndicator(buildIndicator(tab))
             mTabhost!!.addTab(tabSpec, tab.fragment, null)
         }
+
+        mTabhost!!.setOnTabChangedListener({ tabId ->
+            if (tabId === getString(R.string.cart)) {
+
+                refData()
+            }
+        })
+
         mTabhost!!.tabWidget.showDividers = LinearLayout.SHOW_DIVIDER_NONE
         mTabhost!!.currentTab = 0
 
     }
+
+    private fun refData() {
+
+        if (cartFragment == null) {
+
+            val fragment = supportFragmentManager.findFragmentByTag(getString(R.string.cart))
+            if (fragment != null) {
+                cartFragment = fragment as CartFragment
+                cartFragment!!.refData()
+            }
+        } else {
+            cartFragment!!.refData()
+
+        }
+    }
+
 
     private fun buildIndicator(tab: Tab): View {
         val view = mInflater!!.inflate(R.layout.tab_indicator, null)

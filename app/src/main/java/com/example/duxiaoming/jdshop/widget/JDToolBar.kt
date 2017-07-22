@@ -22,7 +22,7 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var mView: View? = null
     private var mTextTitle: TextView? = null
     private var mSearchView: EditText? = null
-    var rightButton: Button? = null
+    var mRightButton: Button? = null
         private set
 
     init {
@@ -65,7 +65,7 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             mView = mInflater!!.inflate(R.layout.toolbar, null)
             mTextTitle = mView!!.findViewById(R.id.toolbar_title) as TextView
             mSearchView = mView!!.findViewById(R.id.toolbar_searchview) as EditText
-            rightButton = mView!!.findViewById(R.id.toolbar_rightButton) as Button
+            mRightButton = mView!!.findViewById(R.id.toolbar_rightButton) as Button
 
             val lp: LayoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL)
             addView(mView, lp)
@@ -76,10 +76,10 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setRightButtonIcon(icon: Drawable) {
 
-        if (rightButton != null) {
+        if (mRightButton != null) {
 
-            rightButton!!.background = icon
-            rightButton!!.visibility = View.VISIBLE
+            mRightButton!!.background = icon
+            mRightButton!!.visibility = View.VISIBLE
         }
 
     }
@@ -92,12 +92,12 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setRightButtonOnClickListener(li: View.OnClickListener) {
 
-        rightButton!!.setOnClickListener(li)
+        mRightButton!!.setOnClickListener(li)
     }
 
     fun setRightButtonText(text: CharSequence) {
-        rightButton!!.text = text
-        rightButton!!.visibility = View.VISIBLE
+        mRightButton!!.text = text
+        mRightButton!!.visibility = View.VISIBLE
     }
 
     fun setRightButtonText(id: Int) {
@@ -140,6 +140,12 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (mTextTitle != null)
             mTextTitle!!.visibility = View.GONE
 
+    }
+
+
+    fun getRightButton(): Button? {
+
+        return this.mRightButton
     }
 
 }

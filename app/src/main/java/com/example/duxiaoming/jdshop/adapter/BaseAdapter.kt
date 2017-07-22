@@ -45,7 +45,13 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
 
 
     override fun getItemCount(): Int {
-        return mData!!.size
+        if (mData == null || (mData as MutableList<T>).size <= 0)
+            return 0
+        else {
+            return mData!!.size
+        }
+
+
     }
 
     fun getItem(position: Int): T? {
@@ -56,9 +62,10 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
     }
 
     fun clear() {
-
-        mData!!.clear()
-        notifyDataSetChanged()
+        if (mData != null) {
+            (mData as MutableList<T>).clear()
+            notifyDataSetChanged()
+        }
     }
 
     /**
@@ -78,8 +85,10 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
     }
 
 
-    fun addData(datas: MutableList<T>) {
-        mData!!.addAll(datas)
+    fun addData(datas: MutableList<T>?) {
+        if (datas != null) {
+            mData?.addAll(datas)
+        }
         notifyDataSetChanged()
     }
 
@@ -87,7 +96,7 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
 
         if (list != null && list.isNotEmpty()) {
 
-            mData!!.addAll(position,list)
+            mData!!.addAll(position, list)
             notifyDataSetChanged()
         }
     }
