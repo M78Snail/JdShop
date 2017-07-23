@@ -77,11 +77,13 @@ class CartProvider(var mContext: Context) {
     }
 
     private fun listToSparse() {
-        val carts: MutableList<ShoppingCart> = getDataFromLocal()
+        val carts: MutableList<ShoppingCart>? = getDataFromLocal()
 
-        for (cart in carts) {
+        if (carts != null) {
+            for (cart in carts) {
 
-            datas.put(cart.id!!.toInt(), cart)
+                datas.put(cart.id!!.toInt(), cart)
+            }
         }
 
     }

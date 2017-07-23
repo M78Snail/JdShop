@@ -151,6 +151,27 @@ class CartAdapter(context: Context, datas: MutableList<ShoppingCart>?, checkBox:
             notifyItemChanged(i)
         }
 
+    }
+
+    fun delCart() {
+        if (!isNull())
+            return
+
+        val iterator = mDataCarts?.iterator()
+        while (iterator?.hasNext() as Boolean) {
+            val cart = iterator.next()
+
+            if (cart.isChecked) {
+                val position = mDataCarts?.indexOf(cart)
+                cartProvider?.delete(cart)
+                iterator.remove()
+                if (position != null) {
+                    notifyItemRemoved(position)
+                }
+            }
+
+        }
+
 
     }
 
