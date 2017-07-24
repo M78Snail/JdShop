@@ -1,9 +1,7 @@
 package com.example.duxiaoming.jdshop.widget
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.support.v7.widget.TintTypedArray
 import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
@@ -72,7 +70,6 @@ class JDToolBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 
     fun setRightButtonIcon(icon: Drawable) {
 

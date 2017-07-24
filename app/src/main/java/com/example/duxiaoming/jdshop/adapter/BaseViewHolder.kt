@@ -18,31 +18,37 @@ open class BaseViewHolder(itemView: View, private val mOnItemClickListener: Base
         this.views = SparseArray<View>()
     }
 
-    fun getTextView(viewId: Int): TextView {
+    fun getTextView(viewId: Int): TextView? {
         return retrieveView(viewId)
     }
 
-    fun getButton(viewId: Int): Button {
+    fun getButton(viewId: Int): Button? {
         return retrieveView(viewId)
     }
 
-    fun getImageView(viewId: Int): ImageView {
+    fun getImageView(viewId: Int): ImageView? {
         return retrieveView(viewId)
     }
 
-    fun getView(viewId: Int): View {
+    fun getView(viewId: Int): View? {
         return retrieveView(viewId)
     }
 
 
-    protected fun <T : View> retrieveView(viewId: Int): T {
+    protected fun <T : View> retrieveView(viewId: Int): T? {
+
+
         var view: View? = views.get(viewId)
         if (view == null) {
             view = itemView.findViewById(viewId)
             views.put(viewId, view)
         }
+        if (view == null) {
+            return null
+        }
         return view as T
     }
+
 
     override fun onClick(v: View) {
         if (mOnItemClickListener != null) {

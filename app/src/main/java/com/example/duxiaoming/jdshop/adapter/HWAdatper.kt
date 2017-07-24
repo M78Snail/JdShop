@@ -24,15 +24,27 @@ class HWAdatper(context: Context, datas: MutableList<Wares>) : SimpleAdapter<War
 
         draweeView.setImageURI(Uri.parse(item.imgUrl))
 
-        viewHoder.getTextView(R.id.text_title).text = item.name
-        viewHoder.getTextView(R.id.text_price).text = "￥ " + item.price
+        viewHoder.getTextView(R.id.text_title)?.text = item.name
+        viewHoder.getTextView(R.id.text_price)?.text = "￥ " + item.price
 
-
-        viewHoder.getButton(R.id.btn_add).setOnClickListener {
-            provider.put(item)
-            Toast.makeText(context, "已经加入购物车", Toast.LENGTH_SHORT).show()
+        val button = viewHoder.getButton(R.id.btn_add)
+        if (button != null) {
+            button.setOnClickListener {
+                provider.put(item)
+                Toast.makeText(context, "已经加入购物车", Toast.LENGTH_SHORT).show()
+            }
         }
 
+    }
+
+    fun resetLayout(layoutId: Int) {
+
+
+        this.layoutResId = layoutId
+
+        Log.d("TAG>>>>>>>", (getDatas()?.size as Int).toString())
+
+        notifyItemRangeChanged(0, getDatas()?.size as Int)
 
     }
 

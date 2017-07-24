@@ -39,8 +39,8 @@ class CartAdapter(context: Context, datas: MutableList<ShoppingCart>?, checkBox:
     }
 
     override fun convert(viewHoder: BaseViewHolder, item: ShoppingCart) {
-        viewHoder.getTextView(R.id.text_title).text = item.name
-        viewHoder.getTextView(R.id.text_price).text = "￥" + item.price
+        viewHoder.getTextView(R.id.text_title)?.text = item.name
+        viewHoder.getTextView(R.id.text_price)?.text = "￥" + item.price
         (viewHoder.getView(R.id.drawee_view) as SimpleDraweeView).setImageURI(Uri.parse(item.imgUrl))
 
         val checkBox = viewHoder.getView(R.id.checkbox) as CheckBox

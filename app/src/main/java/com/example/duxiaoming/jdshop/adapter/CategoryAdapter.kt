@@ -11,6 +11,6 @@ import com.example.duxiaoming.jdshop.bean.Category
  */
 class CategoryAdapter(context: Context, datas: MutableList<Category>) : SimpleAdapter<Category>(context, R.layout.template_single_text, datas) {
     override fun convert(viewHoder: BaseViewHolder, item: Category) {
-        viewHoder.getTextView(R.id.textView).text = item.name
+        viewHoder.getTextView(R.id.textView)?.text = item.name
     }
 }

@@ -22,7 +22,6 @@ import com.google.gson.reflect.TypeToken
 class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
 
 
-
     private var mAdapter: HWAdatper? = null
     private var mRecycleView: RecyclerView? = null
 
@@ -70,6 +69,7 @@ class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
     override fun loadMore(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
         mAdapter!!.addData(mAdapter!!.getDatas()!!.size, datas)
         mRecycleView!!.scrollToPosition(mAdapter!!.getDatas()!!.size)
+        mRefreshLayout!!.finishRefreshLoadMore()
     }
 
     override fun refresh(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {

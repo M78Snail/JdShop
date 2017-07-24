@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -75,6 +76,10 @@ class WareListActivity : AppCompatActivity(), Pager.OnPageListener<Wares>, TabLa
         mToolbar?.setNavigationOnClickListener {
             finish()
         }
+
+        mToolbar?.setRightButtonIcon(R.drawable.icon_grid_32)
+        mToolbar?.getRightButton()?.tag = ACTION_LIST
+        mToolbar?.setRightButtonOnClickListener(this)
     }
 
     private fun initTab() {
@@ -119,15 +124,12 @@ class WareListActivity : AppCompatActivity(), Pager.OnPageListener<Wares>, TabLa
     override fun load(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
         mTxtSummary?.text = "共有" + totalCount + "件商品"
 
-        if (mWaresAdapter == null) {
-            mWaresAdapter = HWAdatper(this, datas)
-            mRecyclerview_wares?.adapter = mWaresAdapter
-            mRecyclerview_wares?.layoutManager = LinearLayoutManager(this)
-            mRecyclerview_wares?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST))
-            mRecyclerview_wares?.itemAnimator = DefaultItemAnimator()
-        } else {
-            mWaresAdapter?.refreshData(datas)
-        }
+        mWaresAdapter = HWAdatper(this, datas)
+        mRecyclerview_wares?.adapter = mWaresAdapter
+        mRecyclerview_wares?.layoutManager = LinearLayoutManager(this)
+        mRecyclerview_wares?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST))
+        mRecyclerview_wares?.itemAnimator = DefaultItemAnimator()
+
     }
 
     override fun refresh(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
@@ -137,8 +139,8 @@ class WareListActivity : AppCompatActivity(), Pager.OnPageListener<Wares>, TabLa
     }
 
     override fun loadMore(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
-        mWaresAdapter?.addData(mWaresAdapter?.getDatas()?.size, datas)
-        mWaresAdapter?.getDatas()?.size?.let { mRecyclerview_wares?.scrollToPosition(it) }
+        mWaresAdapter!!.addData(mWaresAdapter!!.getDatas()!!.size, datas)
+        mWaresAdapter!!.getDatas()!!.size!!.let { mRecyclerview_wares?.scrollToPosition(it) }
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -154,7 +156,34 @@ class WareListActivity : AppCompatActivity(), Pager.OnPageListener<Wares>, TabLa
         pager?.request()
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View) {
+        val action = v.tag as Int
+
+        if (ACTION_LIST === action) {
+
+            mToolbar?.setRightButtonIcon(R.drawable.icon_list_32)
+            mToolbar?.getRightButton()?.tag = ACTION_GIRD
+
+            mRecyclerview_wares!!.layoutManager = GridLayoutManager(this, 2)
+
+            mWaresAdapter!!.resetLayout(R.layout.template_grid_wares)
+            mRecyclerview_wares?.adapter = mWaresAdapter
+
+
+        } else if (ACTION_GIRD === action) {
+
+
+            mToolbar?.setRightButtonIcon(R.drawable.icon_grid_32)
+            mToolbar?.getRightButton()?.tag = ACTION_LIST
+
+            mRecyclerview_wares?.layoutManager = LinearLayoutManager(this)
+
+            mWaresAdapter?.resetLayout(R.layout.template_hot_wares)
+            mRecyclerview_wares?.adapter = mWaresAdapter
+
+
+        }
+
     }
 
 }

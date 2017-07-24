@@ -160,6 +160,8 @@ class Pager {
             listener.loadMore(datas, totalPage, totalCount)
 
         }
+        state = STATE_NORMAL
+
     }
 
     class Builder {
