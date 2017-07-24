@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.Looper
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import com.google.gson.reflect.TypeToken
 import com.squareup.okhttp.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -138,6 +137,5 @@ class OkHttpHelper private constructor() {
 
     }
 
-    inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
 
 }
