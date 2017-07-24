@@ -22,8 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".widget.JDToolBar" />
-        <activity android:name=".http.SpotsCallBack"></activity>
+        <activity android:name=".activity.WareListActivity" />
     </application>
 
 </manifest>

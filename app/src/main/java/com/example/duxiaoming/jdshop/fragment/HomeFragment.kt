@@ -1,5 +1,6 @@
 package com.example.duxiaoming.jdshop.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,9 +15,11 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView
 import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
+import com.example.duxiaoming.jdshop.activity.WareListActivity
 import com.example.duxiaoming.jdshop.adapter.HomeCatgoryAdapter
 import com.example.duxiaoming.jdshop.adapter.decoration.DividerItemDecoration
 import com.example.duxiaoming.jdshop.bean.Banner
+import com.example.duxiaoming.jdshop.bean.Campaign
 import com.example.duxiaoming.jdshop.bean.HomeCampaign
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
 import com.example.duxiaoming.jdshop.http.SpotsCallBack
@@ -45,7 +48,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun requestImages() {
-        val url: String = "http://112.124.22.238:8081/course_api/banner/query?type=1"
+        val url: String = Contants.API.BANNER + "?type=1"
 
         httpHelper.get(url, object : SpotsCallBack<List<Banner>>(context) {
             override fun onSuccess(response: Response, t: List<Banner>) {
@@ -96,15 +99,18 @@ class HomeFragment : Fragment() {
     private fun initData(homeCampaigns: List<HomeCampaign>) {
         mAdatper = HomeCatgoryAdapter(homeCampaigns, context)
         mAdatper!!.setOnCampaignClickListener(object : HomeCatgoryAdapter.OnCampaignClickListener {
-            override fun onClick(view: View, campaign: HomeCampaign) {
-                Toast.makeText(context, "title=" + campaign.title, Toast.LENGTH_LONG).show()
+            override fun onClick(view: View, campaign: Campaign) {
+                val intent = Intent(activity, WareListActivity::class.java)
+                intent.putExtra(Contants.COMPAINGAIN_ID, campaign.id)
+                startActivity(intent)
             }
+
 
         })
 
 
         mRecyclerView?.adapter = mAdatper
-        mRecyclerView?.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL_LIST))
+        mRecyclerView?.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))
         mRecyclerView?.layoutManager = LinearLayoutManager(this.activity)
     }
 

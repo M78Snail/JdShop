@@ -126,6 +126,11 @@ class Pager {
 
     }
 
+    fun putParam(key: String, value: Any) {
+        builder?.params?.put(key, value)
+    }
+
+
     /**
      * 显示数据
      */
@@ -135,7 +140,7 @@ class Pager {
 
 
         if (datas.isEmpty()) {
-            Toast.makeText(builder?.mContext, "加载不到数据", Toast.LENGTH_LONG).show()
+            Toast.makeText(builder?.mContext, "加载不到数据", Toast.LENGTH_SHORT).show()
             return
         }
 

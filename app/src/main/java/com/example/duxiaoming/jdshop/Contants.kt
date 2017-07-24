@@ -17,6 +17,7 @@ object Contants {
         val BANNER = BASE_URL + "banner/query"
 
 
+
         val WARES_HOT = BASE_URL + "wares/hot"
         val WARES_LIST = BASE_URL + "wares/list"
         val WARES_CAMPAIN_LIST = BASE_URL + "wares/campaign/list"

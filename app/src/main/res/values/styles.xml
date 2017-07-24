@@ -35,10 +35,10 @@
     <style name="line">
         <item name="android:background">@color/bg_color</item>
     </style>
+
     <style name="line_vertical" parent="line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-
 
 
     </style>
@@ -52,7 +52,6 @@
     </style>
 
 
-
     <style name="bigButton">
         <item name="android:textSize">@dimen/bigButtonTextSize</item>
         <item name="android:textColor">@color/white_color_selector</item>
@@ -63,7 +62,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">@dimen/normalButtonHeight</item>
     </style>
-
 
 
     <style name="smallButton">
@@ -112,8 +110,22 @@
         <item name="android:button">@drawable/selector_checkbox</item>
     </style>
 
+    <style name="customTabLayout" parent="Widget.Design.TabLayout">
+        <!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+        <item name="tabIndicatorColor">#eb4f38</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">@color/white</item>
+        <item name="tabTextAppearance">@style/customTabTextAppearance</item>
+        <item name="tabSelectedTextColor">#eb4f38</item>
+    </style>
 
-
+    <style name="customTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/darkgrey</item>
+        <item name="textAllCaps">true</item>
+    </style>
 
 
     <style name="ware_title">

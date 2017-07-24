@@ -118,7 +118,7 @@ class CategoryFragment : Fragment() {
             }
 
         })
-        mRecyclerView!!.setAdapter(mCategoryAdapter)
+        mRecyclerView!!.adapter = mCategoryAdapter
         mRecyclerView!!.layoutManager = LinearLayoutManager(context)
         mRecyclerView!!.itemAnimator = DefaultItemAnimator()
         mRecyclerView!!.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))

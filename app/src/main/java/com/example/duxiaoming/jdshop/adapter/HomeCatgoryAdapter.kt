@@ -1,5 +1,8 @@
 package com.example.duxiaoming.jdshop.adapter
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,10 +11,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.duxiaoming.jdshop.R
+import com.example.duxiaoming.jdshop.bean.Campaign
 import com.example.duxiaoming.jdshop.bean.HomeCampaign
 import com.squareup.picasso.Picasso
-
-
 
 
 /**
@@ -67,18 +69,12 @@ class HomeCatgoryAdapter(val mDatas: List<HomeCampaign>, private val mContext: C
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        override fun onClick(v: View?) {
-            val homeCampaign: HomeCampaign = mDatas[layoutPosition]
+        override fun onClick(v: View) {
             if (mListener != null) {
-                if (v != null) {
-                    when (v.id) {
-                        R.id.imgview_big -> mListener!!.onClick(v, homeCampaign)
-                        R.id.imgview_small_top -> mListener!!.onClick(v, homeCampaign)
-                        R.id.imgview_small_bottom -> mListener!!.onClick(v, homeCampaign)
 
-                    }
-                }
+                anim(v)
             }
+
         }
 
         var textTitle: TextView? = null
@@ -96,9 +92,33 @@ class HomeCatgoryAdapter(val mDatas: List<HomeCampaign>, private val mContext: C
             imageViewSmallTop!!.setOnClickListener(this)
             imageViewSmallBottom!!.setOnClickListener(this)
         }
+
+        private fun anim(v: View) {
+
+            val animator = ObjectAnimator.ofFloat(v, "rotationX", 0.0f, 360.0f)
+                    .setDuration(200)
+            animator.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+
+                    val campaign: HomeCampaign = mDatas[layoutPosition]
+
+                    when (v.id) {
+
+                        R.id.imgview_big -> mListener?.onClick(v, campaign.cpOne)
+
+                        R.id.imgview_small_top -> mListener?.onClick(v, campaign.cpTwo)
+
+                        R.id.imgview_small_bottom -> mListener?.onClick(v, campaign.cpThree)
+                    }
+
+                }
+            })
+            animator.start()
+        }
+
     }
 
     interface OnCampaignClickListener {
-        fun onClick(view: View, campaign: HomeCampaign)
+        fun onClick(view: View, campaign: Campaign)
     }
 }

@@ -92,11 +92,13 @@ abstract class BaseAdapter<T, H : BaseViewHolder> @JvmOverloads constructor(prot
         notifyDataSetChanged()
     }
 
-    fun addData(position: Int, list: MutableList<T>?) {
+    fun addData(position: Int?, list: MutableList<T>?) {
 
         if (list != null && list.isNotEmpty()) {
 
-            mData!!.addAll(position, list)
+            if (position != null) {
+                mData!!.addAll(position, list)
+            }
             notifyDataSetChanged()
         }
     }

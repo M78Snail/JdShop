@@ -29,7 +29,6 @@
     <dimen name="smallButtonTextSize">14.0dip</dimen>
 
 
-
     <dimen name="ware_grid_img_width">180dp</dimen>
     <dimen name="ware_grid_img_height">180dp</dimen>
     <dimen name="ware_img_height">150dp</dimen>
