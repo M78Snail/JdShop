@@ -1,5 +1,6 @@
 package com.example.duxiaoming.jdshop.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -11,12 +12,16 @@ import android.view.ViewGroup
 import com.cjj.MaterialRefreshLayout
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
+import com.example.duxiaoming.jdshop.activity.WareDetailActivity
+import com.example.duxiaoming.jdshop.adapter.BaseAdapter
 import com.example.duxiaoming.jdshop.adapter.HWAdatper
 import com.example.duxiaoming.jdshop.adapter.decoration.DividerItemDecoration
 import com.example.duxiaoming.jdshop.bean.Page
 import com.example.duxiaoming.jdshop.bean.Wares
 import com.example.duxiaoming.jdshop.utils.Pager
 import com.google.gson.reflect.TypeToken
+
+
 
 
 class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
@@ -60,6 +65,17 @@ class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
 
     override fun load(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
         mAdapter = HWAdatper(context, datas)
+        (mAdapter as HWAdatper).setOnItemClickListener(object :BaseAdapter.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                val wares = (mAdapter as HWAdatper).getItem(position)
+
+                val intent = Intent(activity, WareDetailActivity::class.java)
+
+                intent.putExtra(Contants.WARE, wares)
+                startActivity(intent)
+            }
+
+        })
         mRecycleView?.itemAnimator = DefaultItemAnimator()
         mRecycleView?.adapter = mAdapter
         mRecycleView?.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))

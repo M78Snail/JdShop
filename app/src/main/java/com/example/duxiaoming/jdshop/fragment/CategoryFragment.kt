@@ -1,7 +1,6 @@
 package com.example.duxiaoming.jdshop.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -32,7 +31,7 @@ import com.example.duxiaoming.jdshop.http.SpotsCallBack
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : android.support.v4.app.Fragment() {
 
 
     private var mHttpHelper = OkHttpHelper.mInstance

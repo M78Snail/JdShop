@@ -57,7 +57,7 @@ class CartProvider(var mContext: Context) {
         commit()
     }
 
-    fun getAll(): MutableList<ShoppingCart> {
+    fun getAll(): MutableList<ShoppingCart>? {
         return getDataFromLocal()
     }
 
@@ -88,7 +88,7 @@ class CartProvider(var mContext: Context) {
 
     }
 
-    private fun getDataFromLocal(): MutableList<ShoppingCart> {
+    private fun getDataFromLocal(): MutableList<ShoppingCart>? {
         val json = PreferencesUtils.getString(mContext, CART_JSON, "")
 
         return JSONUtil.fromJson(json, object : TypeToken<MutableList<ShoppingCart>>() {}.type)
