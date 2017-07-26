@@ -2,7 +2,6 @@ package com.example.duxiaoming.jdshop.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -26,7 +25,8 @@ import com.example.duxiaoming.jdshop.http.SpotsCallBack
 import com.squareup.okhttp.Response
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
+
 
     private var sliderShow: SliderLayout? = null
 
@@ -36,15 +36,15 @@ class HomeFragment : Fragment() {
     private var mBanner: List<Banner>? = null
     private var httpHelper: OkHttpHelper = OkHttpHelper.mInstance!!
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view: View = inflater!!.inflate(R.layout.fragment_home, container, false)
+    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
 
+    override fun init(view: View) {
         sliderShow = view.findViewById(R.id.slider) as SliderLayout
-
         requestImages()
         initRecyclerView(view)
-        return view
     }
 
     private fun requestImages() {

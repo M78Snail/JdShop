@@ -1,7 +1,6 @@
 package com.example.duxiaoming.jdshop.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -25,7 +24,7 @@ import java.util.*
  * blog:m78snail.com
  * description:
  */
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener {
 
 
     private var mToolBar: JDToolBar? = null
@@ -90,8 +89,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         okHttpHelper?.post(Contants.API.LOGIN, params, object : SpotsCallBack<LoginRespMsg<User>>(this@LoginActivity) {
             override fun onSuccess(response: Response, userLoginRespMsg: LoginRespMsg<User>) {
                 val application = JDApplication.mInstance
-                Log.d("TAG>>>>>>data", userLoginRespMsg.data.toString())
-                Log.d("TAG>>>>>>token", userLoginRespMsg.token.toString())
 
                 if (userLoginRespMsg.data != null && userLoginRespMsg.token != null) {
                     application?.putUser(userLoginRespMsg.data!!, userLoginRespMsg.token!!)

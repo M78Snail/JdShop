@@ -2,7 +2,6 @@ package com.example.duxiaoming.jdshop.activity
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -21,7 +20,7 @@ import com.example.duxiaoming.jdshop.widget.JDToolBar
 import com.google.gson.reflect.TypeToken
 
 
-class WareListActivity : AppCompatActivity(), Pager.OnPageListener<Wares>, TabLayout.OnTabSelectedListener, View.OnClickListener {
+class WareListActivity : BaseActivity(), Pager.OnPageListener<Wares>, TabLayout.OnTabSelectedListener, View.OnClickListener {
 
     companion object {
         val TAG_DEFAULT = 0

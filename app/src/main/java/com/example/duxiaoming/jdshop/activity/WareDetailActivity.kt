@@ -2,7 +2,6 @@ package com.example.duxiaoming.jdshop.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
@@ -23,7 +22,7 @@ import java.io.Serializable
  * blog:m78snail.com
  * description:
  */
-class WareDetailActivity : AppCompatActivity(), View.OnClickListener {
+class WareDetailActivity : BaseActivity(), View.OnClickListener {
 
 
     private var mWebView: WebView? = null

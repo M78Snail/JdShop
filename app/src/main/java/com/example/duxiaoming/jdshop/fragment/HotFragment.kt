@@ -2,7 +2,6 @@ package com.example.duxiaoming.jdshop.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -22,9 +21,7 @@ import com.example.duxiaoming.jdshop.utils.Pager
 import com.google.gson.reflect.TypeToken
 
 
-
-
-class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
+class HotFragment : BaseFragment(), Pager.OnPageListener<Wares> {
 
 
     private var mAdapter: HWAdatper? = null
@@ -35,15 +32,16 @@ class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
 
     private var mRefreshLayout: MaterialRefreshLayout? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.fragment_hot, container, false)
+    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+        return inflater.inflate(R.layout.fragment_hot, container, false)
+    }
+
+    override fun init(view: View) {
         mRecycleView = view.findViewById(R.id.recyclerview) as RecyclerView?
 
         mRefreshLayout = view.findViewById(R.id.refresh_view) as MaterialRefreshLayout?
         initPager()
-        return view
-
     }
 
     private fun initPager() {
@@ -65,7 +63,7 @@ class HotFragment : Fragment(), Pager.OnPageListener<Wares> {
 
     override fun load(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
         mAdapter = HWAdatper(context, datas)
-        (mAdapter as HWAdatper).setOnItemClickListener(object :BaseAdapter.OnItemClickListener{
+        (mAdapter as HWAdatper).setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 val wares = (mAdapter as HWAdatper).getItem(position)
 

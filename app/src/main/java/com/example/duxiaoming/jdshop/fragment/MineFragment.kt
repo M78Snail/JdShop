@@ -2,7 +2,6 @@ package com.example.duxiaoming.jdshop.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class MineFragment : Fragment() {
+class MineFragment : BaseFragment() {
+
 
     private var mImageHead: CircleImageView? = null
 
@@ -27,15 +27,12 @@ class MineFragment : Fragment() {
     private var mbtnLogout: Button? = null
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_mine, container, false)
-        initView(view)
-        return view
+    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+        return inflater.inflate(R.layout.fragment_mine, container, false)
     }
 
-
-    private fun initView(view: View) {
+    override fun init(view: View) {
         mImageHead = view.findViewById(R.id.img_head) as CircleImageView?
         mImageHead?.setOnClickListener {
             toLogin()
@@ -54,12 +51,15 @@ class MineFragment : Fragment() {
         showUser(user)
     }
 
+
+
+
     private fun toLogin() {
         val intent = Intent(activity, LoginActivity::class.java)
         startActivityForResult(intent, Contants.REQUEST_CODE)
     }
 
-    fun logout() {
+    private fun logout() {
 
         JDApplication.mInstance?.clearUser()
         showUser(null)

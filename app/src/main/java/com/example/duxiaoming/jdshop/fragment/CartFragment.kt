@@ -1,7 +1,6 @@
 package com.example.duxiaoming.jdshop.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -24,39 +23,14 @@ import com.example.duxiaoming.jdshop.widget.JDToolBar
 import com.squareup.okhttp.Response
 
 
-open class CartFragment : Fragment(), View.OnClickListener {
+open class CartFragment : BaseFragment(), View.OnClickListener {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+        val view: View = inflater.inflate(R.layout.fragment_cart, container, false)
 
-
-    private var mRecyclerView: RecyclerView? = null
-
-    private var cartProvider: CartProvider? = null
-    private var mAdapter: CartAdapter? = null
-    protected var mToolbar: JDToolBar? = null
-    private var mCheckBox: CheckBox? = null
-    private var mTextTotal: TextView? = null
-    private var mBtnDel: Button? = null
-
-    private var mBtnOrder: Button? = null
-    private var carts: MutableList<ShoppingCart>? = mutableListOf()
-
-    private var httpHelper: OkHttpHelper? = OkHttpHelper.mInstance
-
-    companion object {
-        val ACTION_EDIT = 1
-
-        val ACTION_CAMPLATE = 2
-    }
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val view: View = inflater!!.inflate(R.layout.fragment_cart, container, false)
-        initView(view)
-        changeToolbar()
-        showData()
         return view
     }
 
-    private fun initView(view: View) {
+    override fun init(view: View) {
         mToolbar = view.findViewById(R.id.toolbar) as JDToolBar
         mRecyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
         mCheckBox = view.findViewById(R.id.checkbox_all) as CheckBox
@@ -81,7 +55,32 @@ open class CartFragment : Fragment(), View.OnClickListener {
         }
 
         cartProvider = CartProvider(context)
+
+        showData()
+        changeToolbar()
     }
+
+
+    private var mRecyclerView: RecyclerView? = null
+
+    private var cartProvider: CartProvider? = null
+    private var mAdapter: CartAdapter? = null
+    protected var mToolbar: JDToolBar? = null
+    private var mCheckBox: CheckBox? = null
+    private var mTextTotal: TextView? = null
+    private var mBtnDel: Button? = null
+
+    private var mBtnOrder: Button? = null
+    private var carts: MutableList<ShoppingCart>? = mutableListOf()
+
+    private var httpHelper: OkHttpHelper? = OkHttpHelper.mInstance
+
+    companion object {
+        val ACTION_EDIT = 1
+
+        val ACTION_CAMPLATE = 2
+    }
+
 
     private fun showData() {
 

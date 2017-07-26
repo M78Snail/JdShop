@@ -29,7 +29,7 @@ import com.example.duxiaoming.jdshop.http.OkHttpHelper
 import com.example.duxiaoming.jdshop.http.SpotsCallBack
 import com.squareup.okhttp.Response
 
-class CategoryFragment : android.support.v4.app.Fragment() {
+class CategoryFragment : BaseFragment() {
 
 
     private var mHttpHelper = OkHttpHelper.mInstance
@@ -57,21 +57,19 @@ class CategoryFragment : android.support.v4.app.Fragment() {
     private var mWaresAdatper: WaresAdapter? = null
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val view: View = inflater!!.inflate(R.layout.fragment_category, container, false)
-        init(view)
-        initRefreshLayout()
-        requestCategoryData()
-        requestImages()
-        return view
+    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+        return inflater.inflate(R.layout.fragment_category, container, false)
     }
 
-    fun init(view: View) {
+    override fun init(view: View) {
         mRecyclerView = view.findViewById(R.id.recyclerview_category) as RecyclerView?
         mRecyclerviewWares = view.findViewById(R.id.recyclerview_wares) as RecyclerView
         mRefreshLayout = view.findViewById(R.id.refresh_layout) as MaterialRefreshLayout
         sliderShow = view.findViewById(R.id.slider) as SliderLayout
+
+        initRefreshLayout()
+        requestCategoryData()
+        requestImages()
 
     }
 
