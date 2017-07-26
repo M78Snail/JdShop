@@ -53,6 +53,15 @@ abstract class BaseCallback<in T> constructor( var context:Context){
      */
     abstract fun onError(response: Response, code: Int, e: Exception)
 
+
+    /**
+     * Token 验证失败。状态码401,402,403 等时调用此方法
+     * @param response
+     * *
+     * @param code
+     */
+    abstract fun onTokenError(response: Response, code: Int)
+
     companion object {
 
         internal fun getSuperclassTypeParameter(subclass: Class<*>): Type {

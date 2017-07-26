@@ -25,10 +25,8 @@ import com.example.duxiaoming.jdshop.bean.Banner
 import com.example.duxiaoming.jdshop.bean.Category
 import com.example.duxiaoming.jdshop.bean.Page
 import com.example.duxiaoming.jdshop.bean.Wares
-import com.example.duxiaoming.jdshop.http.BaseCallback
 import com.example.duxiaoming.jdshop.http.OkHttpHelper
 import com.example.duxiaoming.jdshop.http.SpotsCallBack
-import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
 
 class CategoryFragment : android.support.v4.app.Fragment() {
@@ -78,30 +76,21 @@ class CategoryFragment : android.support.v4.app.Fragment() {
     }
 
     fun requestCategoryData() {
-        mHttpHelper!!.get(Contants.API.CATEGORY_LIST, object : BaseCallback<MutableList<Category>>(context) {
-            override fun onBeforeRequest(request: Request) {
-            }
 
-            override fun onFailure(request: Request, e: Exception) {
-            }
-
-            override fun onResponse(response: Response) {
-            }
-
+        mHttpHelper!!.get(Contants.API.CATEGORY_LIST, object : SpotsCallBack<MutableList<Category>>(context) {
             override fun onSuccess(response: Response, t: MutableList<Category>) {
                 showCategoryData(t)
                 if (t.isNotEmpty()) {
                     category_id = t[0].id
                     requestWares(category_id)
                 }
-
             }
 
             override fun onError(response: Response, code: Int, e: Exception) {
             }
 
-
         })
+
     }
 
     private fun showCategoryData(categories: MutableList<Category>) {

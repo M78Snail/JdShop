@@ -1,12 +1,16 @@
 package com.example.duxiaoming.jdshop.http
 
 import android.content.Context
+import android.content.Intent
+import android.widget.Toast
+import com.example.duxiaoming.jdshop.R
+import com.example.duxiaoming.jdshop.activity.LoginActivity
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
 import dmax.dialog.SpotsDialog
 
 
-abstract class SpotsCallBack<in T> (val mContext: Context) : BaseCallback<T>(mContext) {
+abstract class SpotsCallBack<in T>(val mContext: Context) : BaseCallback<T>(mContext) {
 
 
     private val mDialog: SpotsDialog
@@ -40,5 +44,11 @@ abstract class SpotsCallBack<in T> (val mContext: Context) : BaseCallback<T>(mCo
 
     override fun onResponse(response: Response) {
         dismissDialog()
+    }
+
+    override fun onTokenError(response: Response, code: Int) {
+        Toast.makeText(mContext, R.string.token_error, Toast.LENGTH_SHORT).show()
+        val intent: Intent = Intent(mContext, LoginActivity::class.java)
+        mContext.startActivity(intent)
     }
 }
