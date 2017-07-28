@@ -19,6 +19,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".JDApplication"
@@ -39,6 +44,10 @@
         <activity android:name=".activity.WareDetailActivity" />
 
         <activity android:name=".activity.LoginActivity" />
+
+        <activity android:name=".activity.RegActivity"/>
+
+        <activity android:name=".activity.RegSecondActivity"/>
 
         <!-- ShareSDK的activity -->
         <activity
@@ -70,12 +79,14 @@
             android:name="Mob-AppSecret"
             android:value="fa2064d2e89f210f4c64bc14a5a8bdba" />
 
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <meta-data
+            android:name="mob_sms_appKey"
+            android:value="1fae602573fae" />
+        <meta-data
+            android:name="mob_sms_appSecrect"
+            android:value="fa2064d2e89f210f4c64bc14a5a8bdba" />
+
+
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ object Contants {
     val DES_KEY = "Cniao5_123456"
 
     val REQUEST_CODE = 0
+    val REQUEST_CODE_PAYMENT = 1
 
 
     object API {
@@ -31,9 +32,12 @@ object Contants {
         val CATEGORY_LIST = BASE_URL + "category/list"
 
         val LOGIN = BASE_URL + "auth/login"
+        val REG = BASE_URL + "auth/reg"
 
         val USER_DETAIL = BASE_URL + "user/get?id=1"
 
+        val ORDER_CREATE = BASE_URL + "/order/create"
+        val ORDER_COMPLEPE = BASE_URL + "/order/complete"
 
     }
 }

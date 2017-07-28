@@ -83,7 +83,7 @@ class OkHttpHelper private constructor() {
                         }
                     } else if(response.code() == TOKEN_ERROR||response.code() == TOKEN_EXPIRE ||response.code() == TOKEN_MISSING ){
 
-                        callbackTokenError(callback,response);
+                        callbackTokenError(callback,response)
                     }
                     else {
                         callbackError(callback, response, null!!)

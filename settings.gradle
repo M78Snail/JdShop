@@ -1,1 +1,1 @@
-include ':app', ':sharesdk'
+include ':app', ':sharesdk', ':smssdk', ':gloablelibrary'

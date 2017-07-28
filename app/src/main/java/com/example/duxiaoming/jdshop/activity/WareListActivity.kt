@@ -139,7 +139,7 @@ class WareListActivity : BaseActivity(), Pager.OnPageListener<Wares>, TabLayout.
 
     override fun loadMore(datas: MutableList<Wares>, totalPage: Int, totalCount: Int) {
         mWaresAdapter!!.addData(mWaresAdapter!!.getDatas()!!.size, datas)
-        mWaresAdapter!!.getDatas()!!.size!!.let { mRecyclerview_wares?.scrollToPosition(it) }
+        mWaresAdapter!!.getDatas()!!.size.let { mRecyclerview_wares?.scrollToPosition(it) }
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
