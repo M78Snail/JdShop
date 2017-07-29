@@ -54,4 +54,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile project(':sharesdk')
     compile project(':smssdk')
+    compile project(':paysdk')
 }
