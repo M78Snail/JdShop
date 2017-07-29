@@ -45,9 +45,13 @@
 
         <activity android:name=".activity.LoginActivity" />
 
-        <activity android:name=".activity.RegActivity"/>
+        <activity android:name=".activity.RegActivity" />
 
-        <activity android:name=".activity.RegSecondActivity"/>
+        <activity android:name=".activity.RegSecondActivity" />
+
+        <activity android:name=".activity.CreateOrderActivity" />
+
+        <activity android:name=".activity.PayResultActivity" />
 
         <!-- ShareSDK的activity -->
         <activity
@@ -90,18 +94,15 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
 
         <!-- 银联支付 sdk -->
-        <activity android:name="com.unionpay.uppay.PayActivity" >
-        </activity>
+        <activity android:name="com.unionpay.uppay.PayActivity"></activity>
 
         <!-- 百付宝 sdk -->
         <activity
@@ -242,9 +243,7 @@
             android:exported="@bool/bd_wallet_switch_global_debug"
             android:hardwareAccelerated="false"
             android:theme="@style/EbpayThemeActivit"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-
+            android:windowSoftInputMode="stateHidden"></activity>
 
 
         <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->

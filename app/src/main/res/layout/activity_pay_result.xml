@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+
+    android:orientation="vertical">
+
+    <com.example.duxiaoming.jdshop.widget.JDToolBar
+        android:id="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+
+        app:contentInsetEnd="56dp"
+        app:title="@string/pay_result" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_view_block"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/largerPadding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_success_128" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="支付成功"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <Button
+        style="@style/bigGreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="@dimen/largerPadding"
+        android:text="返回首页" />
+
+
+</LinearLayout>
