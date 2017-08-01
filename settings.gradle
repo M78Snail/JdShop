@@ -1,1 +1,1 @@
-include ':app', ':sharesdk', ':smssdk', ':gloablelibrary', ':paysdk', ':baidupaysdk'
+include ':app', ':paysdk', ':baidupaysdk'

@@ -7,7 +7,6 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
-import cn.sharesdk.framework.ShareSDK
 import cn.sharesdk.onekeyshare.OnekeyShare
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.R
@@ -92,7 +91,6 @@ class WareDetailActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun showShare() {
-        ShareSDK.initSDK(this)
 
         val oks = OnekeyShare()
         //关闭sso授权
@@ -130,7 +128,6 @@ class WareDetailActivity : BaseActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        ShareSDK.stopSDK(this)
     }
 
 

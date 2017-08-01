@@ -33,7 +33,7 @@ class HotFragment : BaseFragment(), Pager.OnPageListener<Wares> {
     private var mRefreshLayout: MaterialRefreshLayout? = null
 
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_hot, container, false)
     }
 

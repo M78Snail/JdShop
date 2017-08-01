@@ -28,7 +28,7 @@ class MineFragment : BaseFragment() {
 
 
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_mine, container, false)
     }
 

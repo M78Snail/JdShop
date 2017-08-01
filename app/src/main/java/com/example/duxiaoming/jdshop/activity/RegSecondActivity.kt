@@ -25,6 +25,7 @@ import com.example.duxiaoming.jdshop.utils.DESUtil
 import com.example.duxiaoming.jdshop.utils.ManifestUtil
 import com.example.duxiaoming.jdshop.widget.ClearEditText
 import com.example.duxiaoming.jdshop.widget.JDToolBar
+import com.mob.MobSDK
 import com.squareup.okhttp.Response
 import dmax.dialog.SpotsDialog
 import org.json.JSONObject
@@ -82,7 +83,7 @@ class RegSecondActivity : BaseActivity() {
 
 
 
-        SMSSDK.initSDK(this, ManifestUtil.getMetaDataValue(this, "mob_sms_appKey"),
+        MobSDK.init(this, ManifestUtil.getMetaDataValue(this, "mob_sms_appKey"),
                 ManifestUtil.getMetaDataValue(this, "mob_sms_appSecrect"))
 
         evenHanlder = SMSEvenHanlder()

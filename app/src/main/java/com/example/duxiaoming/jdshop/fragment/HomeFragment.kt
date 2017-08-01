@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
     private var httpHelper: OkHttpHelper = OkHttpHelper.mInstance!!
 
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 

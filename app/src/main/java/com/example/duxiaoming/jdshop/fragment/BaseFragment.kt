@@ -15,7 +15,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = createView(inflater, container as ViewGroup, savedInstanceState as Bundle)
+        val view = createView(inflater, container, savedInstanceState)
 
         initToolBar()
 
@@ -30,9 +30,9 @@ abstract class BaseFragment : Fragment() {
     }
 
 
-    abstract fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+    abstract fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
 
-    abstract fun init(view:View)
+    abstract fun init(view: View)
 
 
     fun startActivity(intent: Intent, isNeedLogin: Boolean) {

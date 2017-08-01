@@ -57,7 +57,7 @@ class CategoryFragment : BaseFragment() {
     private var mWaresAdatper: WaresAdapter? = null
 
 
-    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_category, container, false)
     }
 

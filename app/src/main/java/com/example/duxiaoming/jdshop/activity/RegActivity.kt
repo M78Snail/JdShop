@@ -3,6 +3,7 @@ package com.example.duxiaoming.jdshop.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +14,8 @@ import com.example.duxiaoming.jdshop.R
 import com.example.duxiaoming.jdshop.utils.ManifestUtil
 import com.example.duxiaoming.jdshop.widget.ClearEditText
 import com.example.duxiaoming.jdshop.widget.JDToolBar
+import com.mob.MobSDK
+import dmax.dialog.SpotsDialog
 import org.json.JSONObject
 import java.util.regex.Pattern
 
@@ -36,6 +39,8 @@ class RegActivity : BaseActivity() {
 
     private var evenHanlder: SMSEvenHanlder? = null
 
+    private var mDialog: SpotsDialog? = null
+
     companion object {
         private val DEFAULT_COUNTRY_ID = "42"
     }
@@ -45,22 +50,26 @@ class RegActivity : BaseActivity() {
 
         setContentView(R.layout.activity_reg)
         initView()
-        initToolBar()
 
-        SMSSDK.initSDK(this, ManifestUtil.getMetaDataValue(this, "mob_sms_appKey"),
+        MobSDK.init(this, ManifestUtil.getMetaDataValue(this, "mob_sms_appKey"),
                 ManifestUtil.getMetaDataValue(this, "mob_sms_appSecrect"))
+        evenHanlder = SMSEvenHanlder()
 
         SMSSDK.registerEventHandler(evenHanlder)
+
 
         val country = SMSSDK.getCountry(DEFAULT_COUNTRY_ID)
 
         if (country != null) {
+            Log.d("TAG>>>>>>>>>", country[0] + "=" + country[1])
 
             mTxtCountryCode?.text = "+" + country[1]
 
             mTxtCountry?.text = country[0]
 
         }
+        initToolBar()
+
 
     }
 
@@ -75,7 +84,8 @@ class RegActivity : BaseActivity() {
 
         mEtxtPwd = findViewById(R.id.edittxt_pwd) as ClearEditText
 
-        evenHanlder = SMSEvenHanlder()
+        mDialog = SpotsDialog(this, "正在发送短信")
+
     }
 
     private fun initToolBar() {
@@ -92,6 +102,7 @@ class RegActivity : BaseActivity() {
 
         checkPhoneNum(phone, code)
 
+        mDialog?.show()
         //not 86   +86
         SMSSDK.getVerificationCode(code, phone)
 
@@ -129,24 +140,21 @@ class RegActivity : BaseActivity() {
 
 
     inner class SMSEvenHanlder : EventHandler() {
+
         override fun afterEvent(event: Int, result: Int, data: Any?) {
             runOnUiThread {
-                Runnable {
-                    if (result === SMSSDK.RESULT_COMPLETE) {
-                        if (event === SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
-
-                            onCountryListGot(data as ArrayList<HashMap<String, Any>>)
-
-                        } else if (event === SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                            // 请求验证码后，跳转到验证码填写页面
-
-                            afterVerificationCodeRequested()
-
-                        } else if (event === SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-
+                mDialog?.dismiss()
+                Log.d("TAG>>", event.toString() + "---" + result.toString())
+                when (result) {
+                    SMSSDK.RESULT_COMPLETE -> {
+                        when (event) {
+                            SMSSDK.EVENT_GET_VERIFICATION_CODE -> {
+                                // 请求验证码后，跳转到验证码填写页面
+                                afterVerificationCodeRequested()
+                            }
                         }
-                    } else {
-
+                    }
+                    else -> {
                         // 根据服务器返回的网络错误，给toast提示
                         try {
                             (data as Throwable).printStackTrace()
@@ -161,7 +169,6 @@ class RegActivity : BaseActivity() {
                         } catch (e: Exception) {
                             SMSLog.getInstance().w(e)
                         }
-
                     }
 
                 }

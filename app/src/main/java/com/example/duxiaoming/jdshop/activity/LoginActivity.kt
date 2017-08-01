@@ -1,8 +1,8 @@
 package com.example.duxiaoming.jdshop.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.duxiaoming.jdshop.Contants
@@ -44,11 +44,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        mToolBar = findViewById(R.id.toolbar) as JDToolBar?
-        mEtxtPhone = findViewById(R.id.etxt_phone) as ClearEditText?
-        mEtxtPwd = findViewById(R.id.etxt_pwd) as ClearEditText?
-
+        mToolBar = findViewById(R.id.toolbar) as JDToolBar
+        mEtxtPhone = findViewById(R.id.etxt_phone) as ClearEditText
+        mEtxtPwd = findViewById(R.id.etxt_pwd) as ClearEditText
         findViewById(R.id.btn_login).setOnClickListener(this)
+        findViewById(R.id.txt_toReg).setOnClickListener(this)
 
     }
 
@@ -67,8 +67,20 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-
     override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.txt_toReg -> gotoReg()
+            R.id.btn_login -> gotoLogin()
+        }
+
+    }
+
+    private fun gotoReg() {
+        startActivity(Intent(this, RegActivity::class.java))
+        finish()
+    }
+
+    private fun gotoLogin() {
         val phone = mEtxtPhone?.text.toString().trim()
         if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show()
@@ -83,15 +95,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
         val params = HashMap<String, String>(2)
         params.put("phone", phone)
-        Log.d("TAG>>>>>>>>>>>PWD", "--" + DESUtil.encode(Contants.DES_KEY, pwd))
         params.put("password", DESUtil.encode(Contants.DES_KEY, pwd) as String)
 
         okHttpHelper?.post(Contants.API.LOGIN, params, object : SpotsCallBack<LoginRespMsg<User>>(this@LoginActivity) {
-            override fun onSuccess(response: Response, userLoginRespMsg: LoginRespMsg<User>) {
+            override fun onSuccess(response: Response, t: LoginRespMsg<User>) {
                 val application = JDApplication.mInstance
 
-                if (userLoginRespMsg.data != null && userLoginRespMsg.token != null) {
-                    application?.putUser(userLoginRespMsg.data!!, userLoginRespMsg.token!!)
+                if (t.data != null && t.token != null) {
+                    application?.putUser(t.data!!, t.token!!)
                 } else {
                     Toast.makeText(this@LoginActivity, "登录失败，用户名或密码有误", Toast.LENGTH_SHORT).show()
                     return
@@ -111,9 +122,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             override fun onError(response: Response, code: Int, e: Exception) {
             }
 
-
         })
-
     }
 
 }

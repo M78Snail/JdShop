@@ -24,7 +24,7 @@ class ManifestUtil {
 
             var value: Any? = null
 
-            val packageManager = context.getPackageManager()
+            val packageManager = context.packageManager
             val applicationInfo: ApplicationInfo?
 
             try {

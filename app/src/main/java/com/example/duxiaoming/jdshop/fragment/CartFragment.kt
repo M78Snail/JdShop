@@ -24,7 +24,7 @@ import com.squareup.okhttp.Response
 
 
 open class CartFragment : BaseFragment(), View.OnClickListener {
-    override fun createView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View {
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_cart, container, false)
 
         return view
