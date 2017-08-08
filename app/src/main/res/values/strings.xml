@@ -36,4 +36,7 @@
     <string name="pay_result">支付结果</string>
 
     <string name="smssdk_resend_identify_code">重新获取验证码</string>
+
+    <string name="add_addresses">新建收件地址</string>
+
 </resources>

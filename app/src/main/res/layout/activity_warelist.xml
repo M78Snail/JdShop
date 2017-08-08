@@ -14,7 +14,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:isShowSearchView="false"
-        app:navigationIcon="@drawable/icon_back_32px"
+        app:navigationIcon="@drawable/icon_back"
         app:title="商品列表">
 
     </com.example.duxiaoming.jdshop.widget.JDToolBar>

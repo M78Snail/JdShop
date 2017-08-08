@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.example.duxiaoming.jdshop.Contants
 import com.example.duxiaoming.jdshop.JDApplication
 import com.example.duxiaoming.jdshop.R
+import com.example.duxiaoming.jdshop.activity.AddressListActivity
 import com.example.duxiaoming.jdshop.activity.LoginActivity
 import com.example.duxiaoming.jdshop.bean.User
 import com.squareup.picasso.Picasso
@@ -25,7 +26,6 @@ class MineFragment : BaseFragment() {
     private var mTxtUserName: TextView? = null
 
     private var mbtnLogout: Button? = null
-
 
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -47,16 +47,21 @@ class MineFragment : BaseFragment() {
         mbtnLogout?.setOnClickListener {
             logout()
         }
+
+        view.findViewById(R.id.txt_my_address).setOnClickListener { toAddressActivity() }
+
         val user = JDApplication.mInstance?.getUser()
         showUser(user)
     }
 
 
-
-
     private fun toLogin() {
         val intent = Intent(activity, LoginActivity::class.java)
         startActivityForResult(intent, Contants.REQUEST_CODE)
+    }
+
+    private fun toAddressActivity() {
+        startActivity(Intent(activity, AddressListActivity::class.java), true)
     }
 
     private fun logout() {

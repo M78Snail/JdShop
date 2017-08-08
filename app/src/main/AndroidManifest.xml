@@ -49,6 +49,10 @@
 
         <activity android:name=".activity.PayResultActivity" />
 
+        <activity android:name=".activity.AddressListActivity" />
+
+        <activity android:name=".activity.AddressAddActivity" />
+
         <!-- ShareSDK的activity -->
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -73,10 +77,10 @@
 
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- ShareSDK的activity end -->
 
@@ -97,15 +101,15 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind" />
 
         <!-- 银联支付 sdk -->
-        <activity android:name="com.unionpay.uppay.PayActivity"/>
+        <activity android:name="com.unionpay.uppay.PayActivity" />
 
         <!-- 百付宝 sdk -->
         <activity
@@ -246,7 +250,7 @@
             android:exported="@bool/bd_wallet_switch_global_debug"
             android:hardwareAccelerated="false"
             android:theme="@style/EbpayThemeActivit"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
 
         <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->

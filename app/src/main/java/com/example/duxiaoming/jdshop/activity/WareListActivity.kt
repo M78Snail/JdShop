@@ -76,7 +76,7 @@ class WareListActivity : BaseActivity(), Pager.OnPageListener<Wares>, TabLayout.
             finish()
         }
 
-        mToolbar?.setRightButtonIcon(R.drawable.icon_grid_32)
+        mToolbar?.setRightButtonIcon(R.drawable.icon_grid)
         mToolbar?.getRightButton()?.tag = ACTION_LIST
         mToolbar?.setRightButtonOnClickListener(this)
     }
@@ -160,7 +160,7 @@ class WareListActivity : BaseActivity(), Pager.OnPageListener<Wares>, TabLayout.
 
         if (ACTION_LIST === action) {
 
-            mToolbar?.setRightButtonIcon(R.drawable.icon_list_32)
+            mToolbar?.setRightButtonIcon(R.drawable.icon_grid)
             mToolbar?.getRightButton()?.tag = ACTION_GIRD
 
             mRecyclerview_wares!!.layoutManager = GridLayoutManager(this, 2)
@@ -172,7 +172,7 @@ class WareListActivity : BaseActivity(), Pager.OnPageListener<Wares>, TabLayout.
         } else if (ACTION_GIRD === action) {
 
 
-            mToolbar?.setRightButtonIcon(R.drawable.icon_grid_32)
+            mToolbar?.setRightButtonIcon(R.drawable.icon_grid)
             mToolbar?.getRightButton()?.tag = ACTION_LIST
 
             mRecyclerview_wares?.layoutManager = LinearLayoutManager(this)

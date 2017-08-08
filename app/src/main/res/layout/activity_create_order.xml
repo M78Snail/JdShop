@@ -11,7 +11,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:contentInsetEnd="56dp"
-        app:navigationIcon="@drawable/icon_back_32px"
+        app:navigationIcon="@drawable/icon_back"
         app:title="@string/create_order">
 
     </com.example.duxiaoming.jdshop.widget.JDToolBar>

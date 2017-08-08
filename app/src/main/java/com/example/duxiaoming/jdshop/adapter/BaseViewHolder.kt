@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -25,6 +26,11 @@ open class BaseViewHolder(itemView: View, private val mOnItemClickListener: Base
     fun getButton(viewId: Int): Button? {
         return retrieveView(viewId)
     }
+
+    fun getCheckBox(viewId: Int): CheckBox? {
+        return retrieveView(viewId)
+    }
+
 
     fun getImageView(viewId: Int): ImageView? {
         return retrieveView(viewId)

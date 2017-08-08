@@ -38,6 +38,15 @@ object Contants {
 
         val ORDER_CREATE = BASE_URL + "/order/create"
         val ORDER_COMPLEPE = BASE_URL + "/order/complete"
+        val ORDER_LIST = BASE_URL + "order/list"
+
+        val ADDRESS_LIST = BASE_URL + "addr/list"
+        val ADDRESS_CREATE = BASE_URL + "addr/create"
+        val ADDRESS_UPDATE = BASE_URL + "addr/update"
+
+        val FAVORITE_LIST = BASE_URL + "favorite/list"
+        val FAVORITE_CREATE = BASE_URL + "favorite/create"
+
 
     }
 }

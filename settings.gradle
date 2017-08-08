@@ -1,1 +1,1 @@
-include ':app', ':paysdk', ':baidupaysdk'
+include ':app', ':paysdk', ':baidupaysdk', ':smssdk', ':sharesdk'
